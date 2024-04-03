@@ -1,3 +1,6 @@
+import AppBackgroundStyle from "@/components/app-background-pattern";
+import AppFooter from "@/components/app-footer";
+import AppNavigation from "@/components/app-navigation";
 import React from "react";
 
 type DashboardLayoutProps = {
@@ -7,9 +10,10 @@ type DashboardLayoutProps = {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <>
-      <h1>Navigation</h1>
+      <AppBackgroundStyle />
+      <AppNavigation />
       {children}
-      <h1>Footer</h1>
+      <AppFooter />
     </>
   );
 }
