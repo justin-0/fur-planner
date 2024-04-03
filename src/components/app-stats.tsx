@@ -1,8 +1,8 @@
 export default function AppStats() {
   return (
-    <section className="text-center">
+    <section className="text-center text-white">
       <p className="text-2xl font-bold leading-6">2</p>
-      <p className="text-lg opacity-75">current guests</p>
+      <p className="text-lg opacity-85">current guests</p>
     </section>
   );
 }

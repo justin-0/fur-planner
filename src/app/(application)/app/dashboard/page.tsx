@@ -14,7 +14,9 @@ export default function Page() {
           <Heading>
             Fur <span className="font-semibold">Planner</span>
           </Heading>
-          <p className="text-lg opacity-75">Manage current pet guests</p>
+          <p className="text-lg text-white opacity-85">
+            Manage current pet guests
+          </p>
         </section>
         <AppStats />
       </div>
