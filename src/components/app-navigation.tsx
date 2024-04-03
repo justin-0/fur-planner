@@ -19,7 +19,7 @@ export default function AppNavigation() {
   const currentPath = usePathname();
 
   return (
-    <nav className="flex items-center justify-between px-5 py-6 sm:px-16">
+    <nav className="flex items-center justify-between">
       <span>🐶</span>
       <ul className="flex gap-x-5">
         {routes.map((r) => {

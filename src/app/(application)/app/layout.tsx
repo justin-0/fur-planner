@@ -11,9 +11,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <>
       <AppBackgroundStyle />
-      <AppNavigation />
-      {children}
-      <AppFooter />
+      <div className="flex min-h-screen w-screen flex-col px-5 py-6 sm:px-16">
+        <AppNavigation />
+        {children}
+        <AppFooter />
+      </div>
     </>
   );
 }

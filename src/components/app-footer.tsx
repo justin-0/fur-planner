@@ -1,5 +1,7 @@
-import React from "react";
-
 export default function AppFooter() {
-  return <div>app-footr</div>;
+  return (
+    <footer className="mt-auto border-t border-black/40 pt-4">
+      <small className="">&copy; Tino Corporation 2024</small>
+    </footer>
+  );
 }
