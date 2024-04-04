@@ -4,10 +4,15 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function PetList() {
-  const { pets, handleChangePetId, currentPetId } = usePetContext();
+  const { pets, handleChangePetId, currentPetId, search } = usePetContext();
+
+  const filteredPets = pets.filter((pet) =>
+    pet.name.toLowerCase().includes(search),
+  );
+
   return (
     <ul className="border-b border-black/10 bg-white">
-      {pets.map((pet) => {
+      {filteredPets.map((pet) => {
         return (
           <li key={pet.id}>
             <button
