@@ -4,9 +4,9 @@ import Heading from "@/components/heading";
 import PetDetails from "@/components/pet-details";
 import PetList from "@/components/pet-list";
 import StyleBlock from "@/components/style-block";
-import React from "react";
+import React, { Suspense } from "react";
 
-export default function Page() {
+export default async function Page() {
   return (
     <main>
       <div className="mt-10 flex items-center justify-between">
