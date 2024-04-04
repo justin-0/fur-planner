@@ -5,6 +5,7 @@ import { PetData } from "@/types/types";
 type PetContextProps = {
   pets: Array<PetData>;
   handleChangePetId: (id: string) => void;
+  currentPetId: string | null;
 };
 
 type PetContextProviderProps = {
@@ -22,6 +23,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
     <PetContext.Provider
       value={{
         pets,
+        currentPetId,
         handleChangePetId,
       }}
     >
