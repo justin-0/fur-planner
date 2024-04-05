@@ -1,6 +1,7 @@
 import AppSearch from "@/components/app-search";
 import AppStats from "@/components/app-stats";
 import Heading from "@/components/heading";
+import PetButton from "@/components/pet-button";
 import PetDetails from "@/components/pet-details";
 import PetList from "@/components/pet-list";
 import StyleBlock from "@/components/style-block";
@@ -26,8 +27,9 @@ export default async function Page() {
           <AppSearch />
         </div>
         <div className="md:col-start-1 md:row-start-2">
-          <StyleBlock>
+          <StyleBlock className="relative">
             <PetList />
+            <PetButton action="add" />
           </StyleBlock>
         </div>
         <div className="md:col-span-full md:col-start-2 md:row-span-full md:row-start-1">
