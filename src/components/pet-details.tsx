@@ -7,7 +7,6 @@ import Image from "next/image";
 
 export default function PetDetails() {
   const { petDetails } = usePetContext();
-  console.log(petDetails);
 
   return (
     <section className="h-full w-full overflow-scroll md:overflow-auto">
