@@ -30,6 +30,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
 
   const handleClickEndStay = (id: string) => {
     setPets((p) => p.filter((pet) => pet.id !== id));
+    setCurrentPetId(null);
   };
   const handleChangePetId = (id: string) => setCurrentPetId(id);
   const handleChangeSearch = (val: string) => setSearch(val);
