@@ -7,6 +7,7 @@ type PetContextProps = {
   search: string;
   handleChangePetId: (id: string) => void;
   handleChangeSearch: (val: string) => void;
+  handleClickEndStay: (id: string) => void;
   currentPetId: string | null;
   petDetails: PetData | undefined;
   numberOfPets: number;
@@ -23,8 +24,13 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
   const [pets, setPets] = useState(data);
   const [currentPetId, setCurrentPetId] = useState<null | string>(null);
   const [search, setSearch] = useState("");
+
   const petDetails = pets.find((pet) => pet.id === currentPetId);
   const numberOfPets = pets.length;
+
+  const handleClickEndStay = (id: string) => {
+    setPets((p) => p.filter((pet) => pet.id !== id));
+  };
   const handleChangePetId = (id: string) => setCurrentPetId(id);
   const handleChangeSearch = (val: string) => setSearch(val);
 
@@ -38,6 +44,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
         numberOfPets,
         handleChangePetId,
         handleChangeSearch,
+        handleClickEndStay,
       }}
     >
       {children}

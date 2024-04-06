@@ -3,9 +3,10 @@ import { Button } from "./ui/button";
 
 type PetButtonProps = {
   action: "add" | "edit" | "end";
+  onClick?: () => void;
 };
 
-export default function PetButton({ action }: PetButtonProps) {
+export default function PetButton({ action, onClick }: PetButtonProps) {
   if (action === "add")
     return (
       <Button size={"icon"} className="absolute bottom-5 right-5 rounded-full">
@@ -22,7 +23,7 @@ export default function PetButton({ action }: PetButtonProps) {
 
   if (action === "end")
     return (
-      <Button variant={"secondary"} size={"lg"}>
+      <Button variant={"secondary"} size={"lg"} onClick={onClick}>
         End Stay
       </Button>
     );

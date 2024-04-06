@@ -35,6 +35,7 @@ function EmptyView() {
 }
 
 function PetProfile({ petDetails }: { petDetails: PetData }) {
+  const { handleClickEndStay } = usePetContext();
   return (
     <div className="flex flex-col items-center border-b border-black/10 bg-white px-5 py-5 md:flex-row">
       <Image
@@ -49,7 +50,10 @@ function PetProfile({ petDetails }: { petDetails: PetData }) {
       </h2>
       <div className="mt-4 gap-x-4 space-x-4 md:ml-auto md:mt-0 md:flex md:space-x-0">
         <PetButton action="edit" />
-        <PetButton action="end" />
+        <PetButton
+          action="end"
+          onClick={() => handleClickEndStay(petDetails.id)}
+        />
       </div>
     </div>
   );
