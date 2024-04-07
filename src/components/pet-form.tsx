@@ -36,7 +36,7 @@ export default function PetForm({ action, onSubmission }: PetFormProps) {
 
     action === "add"
       ? handleClickAddPet(newPet)
-      : handleClickUpdatePet(currentPetId, newPet);
+      : handleClickUpdatePet(petDetails!.id, newPet);
 
     onSubmission();
   };

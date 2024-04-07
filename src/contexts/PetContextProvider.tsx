@@ -8,8 +8,8 @@ type PetContextProps = {
   handleChangePetId: (id: string) => void;
   handleChangeSearch: (val: string) => void;
   handleClickEndStay: (id: string) => void;
-  handleClickAddPet: (pet: PetData) => void;
-  handleClickUpdatePet: (id: string, pet: PetData) => void;
+  handleClickAddPet: (pet: Omit<PetData, "id">) => void;
+  handleClickUpdatePet: (id: string, pet: Omit<PetData, "id">) => void;
   currentPetId: string | null;
   petDetails: PetData | undefined;
   numberOfPets: number;
@@ -37,7 +37,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
   };
   const handleChangePetId = (id: string) => setCurrentPetId(id);
   const handleChangeSearch = (val: string) => setSearch(val);
-  const handleClickAddPet = (newPet: PetData) => {
+  const handleClickAddPet = (newPet: Omit<PetData, "id">) => {
     setPets((p) => [
       ...p,
       {
