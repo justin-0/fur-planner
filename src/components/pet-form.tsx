@@ -13,13 +13,18 @@ type PetFormProps = {
 };
 
 export default function PetForm({ action, onSubmission }: PetFormProps) {
-  const { handleClickAddPet, numberOfPets, petDetails, handleClickUpdatePet } =
-    usePetContext();
+  const {
+    handleClickAddPet,
+    numberOfPets,
+    petDetails,
+    handleClickUpdatePet,
+    currentPetId,
+  } = usePetContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newPet: PetData = {
+    const newPet = {
       name: formData.get("name") as string,
       ownerName: formData.get("ownerName") as string,
       imageUrl:
@@ -29,7 +34,9 @@ export default function PetForm({ action, onSubmission }: PetFormProps) {
       notes: formData.get("notes") as string,
     };
 
-    action === "add" ? handleClickAddPet(newPet) : handleClickUpdatePet(newPet);
+    action === "add"
+      ? handleClickAddPet(newPet)
+      : handleClickUpdatePet(currentPetId, newPet);
 
     onSubmission();
   };

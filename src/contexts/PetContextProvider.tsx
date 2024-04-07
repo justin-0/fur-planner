@@ -24,10 +24,13 @@ const PetContext = createContext<PetContextProps | null>(null);
 
 function PetContextProvider({ data, children }: PetContextProviderProps) {
   const [pets, setPets] = useState(data);
+
   const [currentPetId, setCurrentPetId] = useState<null | string>(null);
+
   const [search, setSearch] = useState("");
 
   let petDetails = pets.find((pet) => pet.id === currentPetId);
+
   const numberOfPets = pets.length;
 
   const handleClickEndStay = (id: string) => {
@@ -45,14 +48,18 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
       },
     ]);
   };
-  const handleClickUpdatePet = (newPet: PetData) => {
+  const handleClickUpdatePet = (id: string, newPet: PetData) => {
     // Get index of current pet selected
     const updatedPetIndex = pets.findIndex((pet) => pet.id === currentPetId);
     // Copy pets array
     let petsCopy = [...pets];
     // Current pet index of pets copy now assigned to newPet from form
-    petsCopy[updatedPetIndex] = newPet;
+    petsCopy[updatedPetIndex] = {
+      id,
+      ...newPet,
+    };
     // Update state with the pets copy
+    // setCurrentPetId(String(updatedPetIndex));
     setPets([...petsCopy]);
   };
 

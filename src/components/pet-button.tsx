@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import PetForm from "./pet-form";
-import { useState } from "react";
+import React, { useState } from "react";
 
 type PetButtonProps = {
   action: "add" | "edit" | "end";

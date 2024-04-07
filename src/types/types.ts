@@ -1,8 +1,8 @@
 export type PetData = {
-  id?: string;
+  id: string;
   name: string;
   ownerName: string;
-  imageUrl?: string;
+  imageUrl: string;
   age: number;
   notes: string;
 };

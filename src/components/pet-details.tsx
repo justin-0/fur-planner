@@ -52,7 +52,9 @@ function PetProfile({ petDetails }: { petDetails: PetData }) {
         <PetButton action="edit" />
         <PetButton
           action="end"
-          onClick={() => handleClickEndStay(petDetails.id)}
+          onClick={() => {
+            handleClickEndStay(petDetails.id);
+          }}
         />
       </div>
     </div>
