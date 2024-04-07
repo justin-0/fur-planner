@@ -9,6 +9,7 @@ type PetContextProps = {
   handleChangeSearch: (val: string) => void;
   handleClickEndStay: (id: string) => void;
   handleClickAddPet: (pet: PetData) => void;
+  handleClickUpdatePet: (pet: PetData) => void;
   currentPetId: string | null;
   petDetails: PetData | undefined;
   numberOfPets: number;
@@ -26,7 +27,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
   const [currentPetId, setCurrentPetId] = useState<null | string>(null);
   const [search, setSearch] = useState("");
 
-  const petDetails = pets.find((pet) => pet.id === currentPetId);
+  let petDetails = pets.find((pet) => pet.id === currentPetId);
   const numberOfPets = pets.length;
 
   const handleClickEndStay = (id: string) => {
@@ -44,6 +45,16 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
       },
     ]);
   };
+  const handleClickUpdatePet = (newPet: PetData) => {
+    // Get index of current pet selected
+    const updatedPetIndex = pets.findIndex((pet) => pet.id === currentPetId);
+    // Copy pets array
+    let petsCopy = [...pets];
+    // Current pet index of pets copy now assigned to newPet from form
+    petsCopy[updatedPetIndex] = newPet;
+    // Update state with the pets copy
+    setPets([...petsCopy]);
+  };
 
   return (
     <PetContext.Provider
@@ -57,6 +68,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
         handleChangeSearch,
         handleClickEndStay,
         handleClickAddPet,
+        handleClickUpdatePet,
       }}
     >
       {children}

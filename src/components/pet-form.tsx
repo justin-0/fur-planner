@@ -13,7 +13,8 @@ type PetFormProps = {
 };
 
 export default function PetForm({ action, onSubmission }: PetFormProps) {
-  const { handleClickAddPet, numberOfPets, petDetails } = usePetContext();
+  const { handleClickAddPet, numberOfPets, petDetails, handleClickUpdatePet } =
+    usePetContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +29,8 @@ export default function PetForm({ action, onSubmission }: PetFormProps) {
       notes: formData.get("notes") as string,
     };
 
-    handleClickAddPet(newPet);
+    action === "add" ? handleClickAddPet(newPet) : handleClickUpdatePet(newPet);
+
     onSubmission();
   };
 
