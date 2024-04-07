@@ -1,14 +1,16 @@
+"use client";
+
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
 import PetForm from "./pet-form";
+import { useState } from "react";
 
 type PetButtonProps = {
   action: "add" | "edit" | "end";
@@ -16,9 +18,11 @@ type PetButtonProps = {
 };
 
 export default function PetButton({ action, onClick }: PetButtonProps) {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
   if (action === "add" || action === "edit")
     return (
-      <Dialog>
+      <Dialog open={isFormOpen} onOpenChange={() => setIsFormOpen(!isFormOpen)}>
         <DialogTrigger asChild>
           {action === "add" ? (
             <Button
@@ -38,7 +42,10 @@ export default function PetButton({ action, onClick }: PetButtonProps) {
             <DialogTitle>
               {action === "add" ? `Add new pet` : `Update pet details`}
             </DialogTitle>
-            <PetForm />
+            <PetForm
+              action={action}
+              onSubmission={() => setIsFormOpen(false)}
+            />
           </DialogHeader>
         </DialogContent>
       </Dialog>
