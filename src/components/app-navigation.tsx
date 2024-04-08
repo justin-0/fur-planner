@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+
 const routes = [
   {
     key: "dashboard",
@@ -14,6 +15,7 @@ const routes = [
     path: "/app/account",
   },
 ];
+
 export default function AppNavigation() {
   const currentPath = usePathname();
 
