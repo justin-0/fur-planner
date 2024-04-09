@@ -33,7 +33,6 @@ function PetContextProvider({ data: pets, children }: PetContextProviderProps) {
   /* HANDLERS FOR EVENTS */
   const handleClickEndStay = async (id: string) => {
     await removePet(id);
-
     setCurrentPetId(null);
   };
   const handleChangePetId = (id: string) => setCurrentPetId(id);

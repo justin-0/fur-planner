@@ -1,10 +1,11 @@
 "use server";
 
-import { PetData } from "@/types/types";
 import prisma from "@/lib/db";
+import { wait } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 export async function addPet(formData: any) {
+  await wait(4000);
   await prisma.pet.create({
     data: {
       name: formData.get("name"),

@@ -5,8 +5,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { PetData } from "@/types/types";
 import { addPet } from "@/app/actions/actions";
+import PetFormBtn from "./pet-form-btn";
 
 type PetFormProps = {
   action: "add" | "edit";
@@ -17,7 +17,13 @@ export default function PetForm({ action, onClick }: PetFormProps) {
   const { petDetails } = usePetContext();
 
   return (
-    <form action={addPet} className="space-y-4 text-left">
+    <form
+      action={async (formData) => {
+        await addPet(formData);
+        onClick();
+      }}
+      className="space-y-4 text-left"
+    >
       <div className="space-y-2 ">
         <Label htmlFor="name">Name</Label>
         <Input
@@ -65,9 +71,7 @@ export default function PetForm({ action, onClick }: PetFormProps) {
           defaultValue={action === "edit" ? petDetails?.notes : ""}
         />
       </div>
-      <Button type="submit" className="mr-auto" onClick={onClick}>
-        {action === "add" ? `Add new pet` : `Update pet`}
-      </Button>
+      <PetFormBtn action={action} />
     </form>
   );
 }
