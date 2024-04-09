@@ -6,43 +6,18 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { PetData } from "@/types/types";
+import { addPet } from "@/app/actions/actions";
 
 type PetFormProps = {
   action: "add" | "edit";
-  onSubmission: () => void;
+  onClick: () => void;
 };
 
-export default function PetForm({ action, onSubmission }: PetFormProps) {
-  const {
-    handleClickAddPet,
-    numberOfPets,
-    petDetails,
-    handleClickUpdatePet,
-    currentPetId,
-  } = usePetContext();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const newPet = {
-      name: formData.get("name") as string,
-      ownerName: formData.get("ownerName") as string,
-      imageUrl:
-        (formData.get("imageUrl") as string) ||
-        "https://bytegrad.com/course-assets/react-nextjs/pet-placeholder.png",
-      age: Number(formData.get("age")),
-      notes: formData.get("notes") as string,
-    };
-
-    action === "add"
-      ? handleClickAddPet(newPet)
-      : handleClickUpdatePet(petDetails!.id, newPet);
-
-    onSubmission();
-  };
+export default function PetForm({ action, onClick }: PetFormProps) {
+  const { petDetails } = usePetContext();
 
   return (
-    <form className="space-y-4 text-left" onSubmit={handleSubmit}>
+    <form action={addPet} className="space-y-4 text-left">
       <div className="space-y-2 ">
         <Label htmlFor="name">Name</Label>
         <Input
@@ -90,7 +65,7 @@ export default function PetForm({ action, onSubmission }: PetFormProps) {
           defaultValue={action === "edit" ? petDetails?.notes : ""}
         />
       </div>
-      <Button type="submit" className="mr-auto">
+      <Button type="submit" className="mr-auto" onClick={onClick}>
         {action === "add" ? `Add new pet` : `Update pet`}
       </Button>
     </form>

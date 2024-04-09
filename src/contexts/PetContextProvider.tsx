@@ -1,6 +1,7 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useOptimistic, useState } from "react";
 import { PetData } from "@/types/types";
+import { addPet, removePet } from "@/app/actions/actions";
 
 type PetContextProps = {
   pets: Array<PetData>;
@@ -31,20 +32,15 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
   let petDetails = pets.find((pet) => pet.id === currentPetId);
   const numberOfPets = pets.length;
   /* HANDLERS FOR EVENTS */
-  const handleClickEndStay = (id: string) => {
+  const handleClickEndStay = async (id: string) => {
+    await removePet(id);
     setPets((p) => p.filter((pet) => pet.id !== id));
     setCurrentPetId(null);
   };
   const handleChangePetId = (id: string) => setCurrentPetId(id);
   const handleChangeSearch = (val: string) => setSearch(val);
-  const handleClickAddPet = (newPet: Omit<PetData, "id">) => {
-    setPets((p) => [
-      ...p,
-      {
-        ...newPet,
-        id: String(numberOfPets + 1),
-      },
-    ]);
+  const handleClickAddPet = async (newPet: Omit<PetData, "id">) => {
+    await addPet(newPet);
   };
   const handleClickUpdatePet = (id: string, newPet: Omit<PetData, "id">) => {
     // Get index of current pet selected

@@ -42,10 +42,7 @@ export default function PetButton({ action, onClick }: PetButtonProps) {
             <DialogTitle>
               {action === "add" ? `Add new pet` : `Update pet details`}
             </DialogTitle>
-            <PetForm
-              action={action}
-              onSubmission={() => setIsFormOpen(false)}
-            />
+            <PetForm action={action} onClick={() => setIsFormOpen(false)} />
           </DialogHeader>
         </DialogContent>
       </Dialog>
