@@ -6,17 +6,23 @@ import { revalidatePath } from "next/cache";
 
 export async function addPet(formData: any) {
   await wait(4000);
-  await prisma.pet.create({
-    data: {
-      name: formData.get("name"),
-      ownerName: formData.get("ownerName"),
-      imageUrl:
-        formData.get("imageUrl") ||
-        "https://bytegrad.com/course-assets/react-nextjs/pet-placeholder.png",
-      age: Number(formData.get("age")),
-      notes: formData.get("notes"),
-    },
-  });
+  try {
+    await prisma.pet.create({
+      data: {
+        name: formData.get("name"),
+        ownerName: formData.get("ownerName"),
+        imageUrl:
+          formData.get("imageUrl") ||
+          "https://bytegrad.com/course-assets/react-nextjs/pet-placeholder.png",
+        // age: Number(formData.get("age")),
+        notes: formData.get("notes"),
+      },
+    });
+  } catch (error) {
+    return {
+      message: "Pet was not created.",
+    };
+  }
   revalidatePath("/app", "layout");
 }
 

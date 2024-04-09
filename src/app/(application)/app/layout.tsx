@@ -4,6 +4,7 @@ import AppNavigation from "@/components/app-navigation";
 import { PetContextProvider } from "@/contexts/PetContextProvider";
 import React from "react";
 import prisma from "@/lib/db";
+import { Toaster } from "@/components/ui/sonner";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export default async function DashboardLayout({
         <PetContextProvider data={data}>{children}</PetContextProvider>
         <AppFooter />
       </div>
+      <Toaster position="bottom-right" richColors />
     </>
   );
 }

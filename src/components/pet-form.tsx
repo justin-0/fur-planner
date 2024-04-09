@@ -7,20 +7,25 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { addPet } from "@/app/actions/actions";
 import PetFormBtn from "./pet-form-btn";
+import { toast } from "sonner";
 
 type PetFormProps = {
   action: "add" | "edit";
-  onClick: () => void;
+  closeModal: () => void;
 };
 
-export default function PetForm({ action, onClick }: PetFormProps) {
+export default function PetForm({ action, closeModal }: PetFormProps) {
   const { petDetails } = usePetContext();
 
   return (
     <form
       action={async (formData) => {
-        await addPet(formData);
-        onClick();
+        const error = await addPet(formData);
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
+        closeModal();
       }}
       className="space-y-4 text-left"
     >
