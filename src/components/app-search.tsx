@@ -3,7 +3,7 @@
 import { usePetContext } from "@/contexts/PetContextProvider";
 
 export default function AppSearch() {
-  const { handleChangeSearch, search } = usePetContext();
+  const { handleChangeSearch, search } = usePetContext(); 
   return (
     <form className="h-full w-full">
       <input

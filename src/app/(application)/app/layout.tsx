@@ -3,6 +3,7 @@ import AppFooter from "@/components/app-footer";
 import AppNavigation from "@/components/app-navigation";
 import { PetContextProvider } from "@/contexts/PetContextProvider";
 import React from "react";
+import prisma from "@/lib/db";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
@@ -11,11 +12,8 @@ type DashboardLayoutProps = {
 export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
-  const response = await fetch(
-    "https://bytegrad.com/course-assets/projects/petsoft/api/pets",
-  );
+  const data = await prisma.pet.findMany();
 
-  const data = await response.json();
   return (
     <>
       <AppBackgroundStyle />
