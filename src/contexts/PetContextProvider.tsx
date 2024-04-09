@@ -10,7 +10,7 @@ type PetContextProps = {
   handleChangeSearch: (val: string) => void;
   handleClickEndStay: (id: string) => void;
   handleClickAddPet: (pet: Omit<PetData, "id">) => void;
-  handleClickUpdatePet: (id: string, pet: Omit<PetData, "id">) => void;
+  // handleClickUpdatePet: (id: string, pet: Omit<PetData, "id">) => void;
   currentPetId: string | null;
   petDetails: PetData | undefined;
   numberOfPets: number;
@@ -40,18 +40,18 @@ function PetContextProvider({ data: pets, children }: PetContextProviderProps) {
   const handleClickAddPet = async (newPet: Omit<PetData, "id">) => {
     await addPet(newPet);
   };
-  const handleClickUpdatePet = (id: string, newPet: Omit<PetData, "id">) => {
-    // Get index of current pet selected
-    const updatedPetIndex = pets.findIndex((pet) => pet.id === id);
-    // Copy pets array
-    let updatedPets = [...pets];
-    // Current pet index of pets copy now assigned to newPet from form
-    updatedPets[updatedPetIndex] = {
-      id,
-      ...newPet,
-    };
-    setPets([...updatedPets]);
-  };
+  // const handleClickUpdatePet = (id: string, newPet: Omit<PetData, "id">) => {
+  //   // Get index of current pet selected
+  //   const updatedPetIndex = pets.findIndex((pet) => pet.id === id);
+  //   // Copy pets array
+  //   let updatedPets = [...pets];
+  //   // Current pet index of pets copy now assigned to newPet from form
+  //   updatedPets[updatedPetIndex] = {
+  //     id,
+  //     ...newPet,
+  //   };
+  //   setPets([...updatedPets]);
+  // };
 
   return (
     <PetContext.Provider
@@ -65,7 +65,7 @@ function PetContextProvider({ data: pets, children }: PetContextProviderProps) {
         handleChangeSearch,
         handleClickEndStay,
         handleClickAddPet,
-        handleClickUpdatePet,
+        // handleClickUpdatePet,
       }}
     >
       {children}
