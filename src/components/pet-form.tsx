@@ -21,15 +21,19 @@ export default function PetForm({ action, closeModal }: PetFormProps) {
     <form
       action={async (formData) => {
         if (action === "add") {
-          const msg = await addPet(formData);
-
-          if (msg.message === "success") {
+          const add = await addPet(formData);
+          if (add.message === "success") {
             toast.success("Pet Created.");
           } else {
             toast.error("Error: Pet Not Created.");
           }
         } else {
-          await editPet(petDetails!?.id, formData);
+          const edit = await editPet(petDetails!?.id, formData);
+          if (edit.message === "success") {
+            toast.success("Pet Details Updated.");
+          } else {
+            toast.error("Error: Details Not Updated.");
+          }
         }
         closeModal();
       }}

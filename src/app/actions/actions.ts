@@ -40,19 +40,28 @@ export async function removePet(id: string) {
 }
 
 export async function editPet(id: string, formData: any) {
-  await prisma.pet.update({
-    where: {
-      // ... provide filter here
-      id,
-    },
-    data: {
-      // ... provide data here
-      name: formData.get("name"),
-      ownerName: formData.get("ownerName"),
-      imageUrl: formData.get("imageUrl"),
-      age: Number(formData.get("age")),
-      notes: formData.get("notes"),
-    },
-  });
-  revalidatePath("/app", "layout");
+  try {
+    await prisma.pet.update({
+      where: {
+        // ... provide filter here
+        id,
+      },
+      data: {
+        // ... provide data here
+        name: formData.get("name"),
+        ownerName: formData.get("ownerName"),
+        imageUrl: formData.get("imageUrl"),
+        age: Number(formData.get("age")),
+        notes: formData.get("notes"),
+      },
+    });
+    revalidatePath("/app", "layout");
+    return {
+      message: "success",
+    };
+  } catch (error) {
+    return {
+      message: "error",
+    };
+  }
 }
