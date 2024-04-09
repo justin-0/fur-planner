@@ -23,9 +23,8 @@ type PetContextProviderProps = {
 
 const PetContext = createContext<PetContextProps | null>(null);
 
-function PetContextProvider({ data, children }: PetContextProviderProps) {
+function PetContextProvider({ data: pets, children }: PetContextProviderProps) {
   /* STATE */
-  const [pets, setPets] = useState(data);
   const [currentPetId, setCurrentPetId] = useState<null | string>(null);
   const [search, setSearch] = useState("");
   /* VALUES DERVIED FROM STATE, CALCULATED DURING RENDER */
@@ -34,7 +33,7 @@ function PetContextProvider({ data, children }: PetContextProviderProps) {
   /* HANDLERS FOR EVENTS */
   const handleClickEndStay = async (id: string) => {
     await removePet(id);
-    setPets((p) => p.filter((pet) => pet.id !== id));
+
     setCurrentPetId(null);
   };
   const handleChangePetId = (id: string) => setCurrentPetId(id);
